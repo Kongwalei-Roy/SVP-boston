@@ -374,3 +374,249 @@ a{ color:inherit; text-decoration:none; }
   .card{ break-inside: avoid; box-shadow:none; border:1px solid #ddd; }
   body{ background:white; color:black; }
 }
+/* ===========================
+   LIVELY UPGRADE PATCH
+   Paste at bottom of styles.css
+   =========================== */
+
+/* Add richer gradients + subtle noise feel */
+body::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events:none;
+  background:
+    radial-gradient(900px 500px at 15% 10%, rgba(24,195,184,.22), transparent 60%),
+    radial-gradient(900px 500px at 85% 5%, rgba(42,109,244,.20), transparent 55%),
+    radial-gradient(700px 400px at 50% 100%, rgba(255,90,122,.10), transparent 60%);
+  filter: saturate(1.15);
+  opacity: .9;
+  z-index: -1;
+}
+
+/* Slightly more “premium glass” */
+.card{
+  position: relative;
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(255,255,255,.085), rgba(255,255,255,.035));
+  border-color: rgba(255,255,255,.12);
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+/* Card hover lift + glow */
+.card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 18px 50px rgba(0,0,0,.45);
+  border-color: rgba(24,195,184,.35);
+}
+
+/* Add a soft accent glow in top-right corner of cards */
+.card::after{
+  content:"";
+  position:absolute;
+  top:-120px;
+  right:-120px;
+  width:240px;
+  height:240px;
+  background: radial-gradient(circle, rgba(24,195,184,.20), transparent 60%);
+  opacity:.6;
+  transform: rotate(15deg);
+  pointer-events:none;
+}
+
+/* Animated gradient for primary buttons (subtle) */
+.btn.primary{
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+  box-shadow: 0 10px 22px rgba(24,195,184,.18);
+}
+@keyframes gradientShift{
+  0%{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+
+/* Nicer button press */
+.btn:active{
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Tabs: more “pill” depth + hover sheen */
+.tab{
+  position: relative;
+  overflow: hidden;
+}
+.tab::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.10), transparent);
+  transform: translateX(-120%);
+  transition: transform .35s ease;
+}
+.tab:hover::before{
+  transform: translateX(120%);
+}
+.tab.active{
+  box-shadow: 0 10px 22px rgba(24,195,184,.10);
+}
+
+/* KPI value pop */
+.kpi .value{
+  text-shadow: 0 10px 25px rgba(0,0,0,.35);
+}
+
+/* Subtle animated “pulse” on logo */
+.logo{
+  position: relative;
+  overflow: hidden;
+}
+.logo::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.28), transparent 55%);
+  animation: logoPulse 3.6s ease-in-out infinite;
+}
+@keyframes logoPulse{
+  0%,100%{ transform: translate(0,0) scale(1); opacity:.6; }
+  50%{ transform: translate(10px,-8px) scale(1.08); opacity:.9; }
+}
+
+/* Table: better zebra + hover highlight */
+.table tbody tr{
+  transition: background .12s ease;
+}
+.table tbody tr:nth-child(odd){
+  background: rgba(255,255,255,.02);
+}
+.table tbody tr:hover{
+  background: rgba(24,195,184,.08);
+}
+
+/* Badges: more depth */
+.badge{
+  box-shadow: 0 10px 18px rgba(0,0,0,.18);
+}
+
+/* Make section titles feel more like headings */
+.sectionTitle{
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce){
+  .card, .btn, .tab, .logo::after{
+    transition:none !important;
+    animation:none !important;
+  }
+}
+/* =====================================================
+   LIVE WEBSITE MOTION LAYER
+   Paste at VERY BOTTOM of styles.css
+   ===================================================== */
+
+/* ---------- Floating Ambient Background Orbs ---------- */
+body::after{
+  content:"";
+  position: fixed;
+  inset: -20%;
+  pointer-events: none;
+  z-index: -2;
+  background:
+    radial-gradient(180px 180px at 15% 20%, rgba(24,195,184,.25), transparent 70%),
+    radial-gradient(220px 220px at 80% 25%, rgba(42,109,244,.22), transparent 70%),
+    radial-gradient(260px 260px at 40% 85%, rgba(255,90,122,.15), transparent 70%);
+  animation: floatBackground 28s ease-in-out infinite;
+}
+
+@keyframes floatBackground{
+  0%   { transform: translateY(0) translateX(0); }
+  50%  { transform: translateY(-40px) translateX(30px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* ---------- Hanging Glow Particles ---------- */
+.container::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(6px 6px at 20% 10%, rgba(255,255,255,.6), transparent 70%),
+    radial-gradient(8px 8px at 65% 15%, rgba(24,195,184,.6), transparent 70%),
+    radial-gradient(6px 6px at 85% 35%, rgba(42,109,244,.6), transparent 70%),
+    radial-gradient(5px 5px at 30% 60%, rgba(255,255,255,.4), transparent 70%);
+  animation: hangDrift 22s linear infinite;
+}
+
+@keyframes hangDrift{
+  0%   { transform: translateY(0); opacity:.7; }
+  50%  { transform: translateY(20px); opacity:1; }
+  100% { transform: translateY(0); opacity:.7; }
+}
+
+/* ---------- Subtle Card “Breathing” ---------- */
+.card{
+  animation: breathe 6s ease-in-out infinite;
+}
+
+@keyframes breathe{
+  0%,100%{ transform: scale(1); }
+  50%{ transform: scale(1.008); }
+}
+
+/* ---------- Hover Magnet Effect ---------- */
+.card:hover{
+  transform: translateY(-4px) scale(1.015);
+}
+
+/* ---------- Floating KPI Glow ---------- */
+.kpi .value{
+  position: relative;
+}
+
+.kpi .value::after{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  background: radial-gradient(circle, rgba(24,195,184,.35), transparent 60%);
+  opacity:.35;
+  filter: blur(12px);
+  z-index:-1;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow{
+  0%,100%{ opacity:.25; }
+  50%{ opacity:.45; }
+}
+
+/* ---------- Gentle Button Float ---------- */
+.btn.primary{
+  animation: floatButton 4s ease-in-out infinite;
+}
+
+@keyframes floatButton{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-2px); }
+}
+
+/* ---------- Spinner feels more alive ---------- */
+.spinner{
+  box-shadow: 0 0 18px rgba(24,195,184,.6);
+}
+
+/* ---------- Reduce Motion Accessibility ---------- */
+@media (prefers-reduced-motion: reduce){
+  body::after,
+  .container::before,
+  .card,
+  .btn.primary,
+  .kpi .value::after{
+    animation: none !important;
+  }
+}
