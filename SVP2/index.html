@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SVP Boston — Donation & Impact Dashboard</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Track donation impact and contributions with SVP Boston's interactive dashboard">
+    <meta name="keywords" content="philanthropy, donations, impact tracking, SVP Boston">
+    <meta name="author" content="SVP Boston">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- React (CDN) -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <!-- Babel (JSX in browser; no build step) -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Papa Parse -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root">
+      <div class="pageLoading">
+        <div class="spinner"></div>
+        <div>Loading Dashboard...</div>
+      </div>
+    </div>
+
+    <!-- Your React app -->
+    <script type="text/babel" src="app.js"></script>
+  </body>
+</html>
